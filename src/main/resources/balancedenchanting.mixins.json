@@ -1,12 +1,11 @@
 {
   "required": true,
-  "package": "com.example.examplemod.mixin",
+  "package": "tfar.balancedenchanting.mixin",
   "compatibilityLevel": "JAVA_8",
-  "refmap": "examplemod.refmap.json",
+  "refmap": "balancedenchanting.refmap.json",
   "mixins": [
-  ],
-  "client":[
-    "ExampleMixin"
+    "PlayerEntityMixin",
+    "RepairContainerMixin"
   ],
   "injectors": {
     "defaultRequire": 1
