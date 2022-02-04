@@ -10,6 +10,6 @@ import tfar.balancedenchanting.BalancedEnchanting;
 public class PlayerEntityMixin {
 	@Redirect(at = @At(value = "INVOKE",target = "Lnet/minecraft/entity/player/PlayerEntity;addExperienceLevel(I)V"), method = "onEnchant")
 	private void balancedEnchantingTable(PlayerEntity playerEntity, int levels) {
-		playerEntity.giveExperiencePoints(-BalancedEnchanting.convertLevelToTotalxp(-levels));
+		BalancedEnchanting.handleEnchantXp(playerEntity, levels);
 	}
 }

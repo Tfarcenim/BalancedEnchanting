@@ -4,6 +4,7 @@
   "compatibilityLevel": "JAVA_8",
   "refmap": "balancedenchanting.refmap.json",
   "mixins": [
+    "EnchantmentContainerMixin",
     "PlayerEntityMixin",
     "RepairContainerMixin"
   ],
