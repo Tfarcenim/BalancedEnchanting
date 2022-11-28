@@ -1,15 +1,10 @@
 package tfar.balancedenchanting;
 
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.inventory.container.Container;
-import net.minecraft.inventory.container.EnchantmentContainer;
-import net.minecraftforge.common.MinecraftForge;
+
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.inventory.AbstractContainerMenu;
+import net.minecraft.world.inventory.EnchantmentMenu;
 import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
-import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
-import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 
 // The value here should match an entry in the META-INF/mods.toml file
 @Mod(BalancedEnchanting.MODID)
@@ -21,7 +16,7 @@ public class BalancedEnchanting {
 	 * This method returns the cap amount of experience that the experience bar can hold. With each level, the experience
 	 * cap on the player's experience bar is raised by 10.
 	 *
-	 * @see PlayerEntity#xpBarCap()
+	 * @see Player#getXpNeededForNextLevel()
 	 * level to level + 1
 	 */
 	private static int getRequiredXpToNextLevel(int level) {
@@ -43,13 +38,11 @@ public class BalancedEnchanting {
 
 	public static final ThreadLocal<Integer> id = ThreadLocal.withInitial(() -> 0);
 
-	public static void handleEnchantXp(PlayerEntity player, int cost) {
-		Container menu = player.containerMenu;
+	public static void handleEnchantXp(Player player, int cost) {
+		AbstractContainerMenu menu = player.containerMenu;
 
-		if (menu instanceof EnchantmentContainer) {
-			EnchantmentContainer enchantmentContainer = (EnchantmentContainer) menu;
-
-			int levelsRequired = enchantmentContainer.costs[id.get()];
+		if (menu instanceof EnchantmentMenu enchantmentMenu) {
+			int levelsRequired = enchantmentMenu.costs[id.get()];
 
 			//simply subtracting the cost of the levels would be FAR too cheap as it would go from 0-3
 			//when we need 27 - 30
