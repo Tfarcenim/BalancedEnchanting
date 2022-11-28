@@ -44,12 +44,12 @@ public class BalancedEnchanting {
 	public static final ThreadLocal<Integer> id = ThreadLocal.withInitial(() -> 0);
 
 	public static void handleEnchantXp(PlayerEntity player, int cost) {
-		Container menu = player.openContainer;
+		Container menu = player.containerMenu;
 
 		if (menu instanceof EnchantmentContainer) {
 			EnchantmentContainer enchantmentContainer = (EnchantmentContainer) menu;
 
-			int levelsRequired = enchantmentContainer.enchantLevels[id.get()];
+			int levelsRequired = enchantmentContainer.costs[id.get()];
 
 			//simply subtracting the cost of the levels would be FAR too cheap as it would go from 0-3
 			//when we need 27 - 30

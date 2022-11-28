@@ -9,7 +9,7 @@ import tfar.balancedenchanting.BalancedEnchanting;
 
 @Mixin(RepairContainer.class)
 public class RepairContainerMixin {
-	@Redirect(at = @At(value = "INVOKE",target = "Lnet/minecraft/entity/player/PlayerEntity;addExperienceLevel(I)V"), method = "func_230301_a_")
+	@Redirect(at = @At(value = "INVOKE",target = "Lnet/minecraft/entity/player/PlayerEntity;addExperienceLevel(I)V"), method = "onTake")
 	private void balancedAnvil(PlayerEntity playerEntity, int levels) {
 		playerEntity.giveExperiencePoints(-BalancedEnchanting.convertLevelToTotalxp(-levels));
 	}
